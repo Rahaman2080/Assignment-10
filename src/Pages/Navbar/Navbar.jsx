@@ -11,7 +11,7 @@ const Navbar = () => {
     </>
     return (
         <div>
-            <div className="navbar bg-base-300">
+            <div className="navbar bg-sky-200">
                 <div className="navbar-start">
                     <div className="dropdown">
                         <label tabIndex={0} className="btn btn-ghost lg:hidden">
@@ -21,7 +21,7 @@ const Navbar = () => {
                             {navLinks}
                         </ul>
                     </div>
-                    <a className="btn btn-ghost normal-case text-xl">daisyUI</a>
+                    <img className="w-24 h-14" src="https://i.ibb.co/ysW4Wj6/channels4-profile-removebg-preview.png" alt="" />
                 </div>
                 <div className="navbar-center hidden lg:flex">
                     <ul className="menu menu-horizontal px-1">

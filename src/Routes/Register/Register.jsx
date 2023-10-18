@@ -1,8 +1,52 @@
 import { Link } from "react-router-dom";
 import { ImEye } from 'react-icons/im';
 import Navbar from "../../Pages/Navbar/Navbar";
+import { useContext } from "react";
+import { AuthContext } from "../../Context/AuthProvider";
+import Swal from "sweetalert2";
+import { updateProfile } from "firebase/auth";
+
 
 const Register = () => {
+    const { createUser } = useContext(AuthContext);
+
+    const hanldeRegister = event => {
+        event.preventDefault();
+        const form = event.target;
+        const name = form.name.value;
+        const email = form.email.value;
+        const photo = form.photo.value;
+        const password = form.password.value;
+        const accepted = form.terms.checked;
+
+        if(!/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=!])(?!.*\s).{6,}$/.test(password)){
+            Swal.fire('Password should be 6 characters with a number, a Lower and Uppercase and a special character')
+            
+            return;
+        } else if(!accepted){
+            Swal.fire('Please accept our terms and conditions')
+            return;
+        }
+
+        // Create User
+        createUser(email, password)
+        .then(result =>{
+            console.log(result.user);
+            Swal.fire("User Created Successfully")
+
+            // update profile
+            updateProfile(result.user, {
+                displayName: name,
+                photoURL: photo
+            })
+            .then()
+            .catch()
+        })
+        .catch(error =>{
+            Swal.fire(error.message);
+        })   
+    }
+
     return (
         <div>
             <Navbar></Navbar>
@@ -11,11 +55,11 @@ const Register = () => {
                 <div className="max-w-2xl mx-auto border bg-gradient-to-r from-blue-500 from-10% via-sky-500 via-30% to-emerald-400 to-90% py-8 rounded-3xl shadow-2xl">
                     <div className=" mx-6 md:mx-auto md:w-4/5">
                         <h1 className="text-pink-600 text-3xl font-semibold mb-8 text-center">Please Register</h1>
-                        <form>
+                        <form onSubmit={hanldeRegister}>
                             <div className="mb-4 flex flex-col gap-6">
                                 <div className="relative h-11 w-full min-w-[200px]">
                                 <input
-                                        type="email"
+                                        type="text"
                                         name="name"
                                         className="peer h-full w-full rounded-[7px] border border-blue-gray-200 bg-transparent px-3 py-2.5 font-sans text-sm font-normal text-blue-gray-700 outline outline-0 transition-all placeholder-shown:border placeholder-shown:border-blue-gray-200 placeholder-shown:border-t-blue-gray-200 focus:border-2 focus:border-purple-500 focus:border-t-transparent focus:outline-0 disabled:border-0 disabled:bg-blue-gray-50"
                                         placeholder=" "
@@ -26,7 +70,7 @@ const Register = () => {
                                 </div>
                                 <div className="relative h-11 w-full min-w-[200px]">
                                 <input
-                                        type="email"
+                                        type="text"
                                         name="photo"
                                         className="peer h-full w-full rounded-[7px] border border-blue-gray-200 bg-transparent px-3 py-2.5 font-sans text-sm font-normal text-blue-gray-700 outline outline-0 transition-all placeholder-shown:border placeholder-shown:border-blue-gray-200 placeholder-shown:border-t-blue-gray-200 focus:border-2 focus:border-purple-500 focus:border-t-transparent focus:outline-0 disabled:border-0 disabled:bg-blue-gray-50"
                                         placeholder=" "
@@ -97,9 +141,9 @@ const Register = () => {
                                     htmlFor="checkbox"
                                 >
                                     <p className="flex items-center font-sans text-sm font-normal leading-normal text-gray-700 antialiased">
-                                        <p className="font-medium transition-colors hover:text-pink-500" href="#">
+                                        <a className="font-medium transition-colors hover:text-pink-500" href="">
                                             &nbsp;I agree the Terms and Conditions
-                                        </p>
+                                        </a>
                                     </p>
                                 </label>
                             </div>
