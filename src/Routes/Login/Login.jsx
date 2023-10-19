@@ -1,9 +1,49 @@
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { ImEye } from 'react-icons/im';
 import Navbar from "../../Pages/Navbar/Navbar";
+import { useContext } from "react";
+import { AuthContext } from "../../Context/AuthProvider";
+import Swal from "sweetalert2";
+import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
+import auth from "../../Firebase/Firebase.config";
 
 
 const Login = () => {
+    const { signIn } = useContext(AuthContext);
+    const location = useLocation();
+    const navigate = useNavigate();
+
+    const handleLogin = event => {
+        event.preventDefault();
+        const form = event.target;
+        const email = form.email.value;
+        const password = form.password.value;
+
+        signIn(email, password)
+            .then(result => {
+                console.log(result.user);
+                Swal.fire('User login successful');
+
+                // navigate after loading
+                navigate(location?.state ? location.state : '/');
+            })
+            .catch(error => {
+                Swal.fire(error.message);
+            })
+    }
+
+    const googleProvider = new GoogleAuthProvider();
+    const handleGoogleLogin = () => {
+        signInWithPopup(auth, googleProvider)
+            .then(result =>{
+                console.log(result.user);
+                Swal.fire('Google user login successfull')
+            })
+            .catch(error =>{
+                Swal.fire(error.message);
+            })
+    }
+
     return (
         <div>
             <Navbar></Navbar>
@@ -13,7 +53,7 @@ const Login = () => {
                         <h1 className=" text-3xl md:text-5xl font-bold">Login now!</h1>
                     </div>
                     <div className="card flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-100">
-                        <form className="card-body">
+                        <form onSubmit={handleLogin} className="card-body">
                             <div className="form-control">
                                 <div className="relative h-10 w-full min-w-[200px]">
                                     <input
@@ -56,8 +96,8 @@ const Login = () => {
                             </p>
                         </form>
                         <div className="mx-5 text-center">
-                        <p className="font-bold py-2">OR</p>
-                        <button className='p-3 mb-4 flex gap-2 btn btn-outline btn-info normal-case w-full font-bold text-sm md:text-xl'><img src="https://i.ibb.co/hL8843b/google-Logo.png" className='w-6' alt="" />Login with google</button>
+                            <p className="font-bold py-2">OR</p>
+                            <button onClick={handleGoogleLogin} className='p-3 mb-4 flex gap-2 btn btn-outline btn-info normal-case w-full font-bold text-sm md:text-xl'><img src="https://i.ibb.co/hL8843b/google-Logo.png" className='w-6' alt="" />Login with google</button>
                         </div>
                     </div>
                 </div>
