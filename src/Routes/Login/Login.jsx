@@ -1,7 +1,7 @@
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import { ImEye } from 'react-icons/im';
+import { ImEye, ImEyeBlocked } from 'react-icons/im';
 import Navbar from "../../Pages/Navbar/Navbar";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { AuthContext } from "../../Context/AuthProvider";
 import Swal from "sweetalert2";
 import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
@@ -12,6 +12,7 @@ const Login = () => {
     const { signIn } = useContext(AuthContext);
     const location = useLocation();
     const navigate = useNavigate();
+    const [showPassword, setShowPassword] = useState(false);
 
     const handleLogin = event => {
         event.preventDefault();
@@ -22,7 +23,11 @@ const Login = () => {
         signIn(email, password)
             .then(result => {
                 console.log(result.user);
-                Swal.fire('User login successful');
+                Swal.fire({
+                    icon: 'success',
+                    title: "User login successfull",
+                    confirmButtonText: 'Ok'
+                });
 
                 // navigate after loading
                 navigate(location?.state ? location.state : '/');
@@ -37,7 +42,13 @@ const Login = () => {
         signInWithPopup(auth, googleProvider)
             .then(result =>{
                 console.log(result.user);
-                Swal.fire('Google user login successfull')
+                Swal.fire({
+                    icon: 'success',
+                    title: "Google user login successful",
+                    confirmButtonText: 'Ok'
+                });
+                // navigate after loading
+                navigate(location?.state ? location.state : '/');
             })
             .catch(error =>{
                 Swal.fire(error.message);
@@ -69,11 +80,13 @@ const Login = () => {
                             </div>
                             <div className="form-control">
                                 <div className="relative h-10 w-full min-w-[200px]">
-                                    <div className="absolute top-2/4 right-3 grid h-5 w-5 -translate-y-2/4 place-items-center text-blue-gray-500">
-                                        <ImEye aria-hidden="true"></ImEye>
-                                    </div>
+                                    <span className="absolute top-2/4 right-3 grid h-5 w-5 -translate-y-2/4 place-items-center text-blue-gray-500 cursor-pointer" onClick={()=> setShowPassword(!showPassword)}>
+                                    {
+                                            showPassword ? <ImEye></ImEye> : <ImEyeBlocked></ImEyeBlocked>
+                                        }
+                                    </span>
                                     <input
-                                        type="password"
+                                        type={showPassword ? "text" : "password"}
                                         name="password"
                                         className="peer h-full w-full rounded-[7px] border border-blue-gray-200 bg-transparent px-3 py-2.5 font-sans text-sm font-normal text-blue-gray-700 outline outline-0 transition-all placeholder-shown:border placeholder-shown:border-blue-gray-200 placeholder-shown:border-t-blue-gray-200 focus:border-2 focus:border-purple-500 focus:border-t-transparent focus:outline-0 disabled:border-0 disabled:bg-blue-gray-50"
                                         placeholder=" "

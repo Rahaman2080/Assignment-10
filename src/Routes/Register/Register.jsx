@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
-import { ImEye } from 'react-icons/im';
+import { ImEye, ImEyeBlocked } from 'react-icons/im';
 import Navbar from "../../Pages/Navbar/Navbar";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { AuthContext } from "../../Context/AuthProvider";
 import Swal from "sweetalert2";
 import { updateProfile } from "firebase/auth";
@@ -9,6 +9,7 @@ import { updateProfile } from "firebase/auth";
 
 const Register = () => {
     const { createUser } = useContext(AuthContext);
+    const [showPassword, setShowPassword] = useState(false);
 
     const hanldeRegister = event => {
         event.preventDefault();
@@ -19,9 +20,12 @@ const Register = () => {
         const password = form.password.value;
         const accepted = form.terms.checked;
 
-        if(!/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=!])(?!.*\s).{6,}$/.test(password)){
-            Swal.fire('Password should be 6 characters with a number, a Lower and Uppercase and a special character')
-            
+        if(password.length < 6){
+            Swal.fire('Password should be 6 characters');
+            return;
+        }
+        else if(!/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=!])(?!.*\s)$/.test(password)){
+            Swal.fire('Password should be a number, a Lower and Uppercase and a special character')
             return;
         } else if(!accepted){
             Swal.fire('Please accept our terms and conditions')
@@ -32,7 +36,11 @@ const Register = () => {
         createUser(email, password)
         .then(result =>{
             console.log(result.user);
-            Swal.fire("User Created Successfully")
+            Swal.fire({
+                icon: 'success',
+                title: "User login successfull",
+                confirmButtonText: 'Ok'
+            })
 
             // update profile
             updateProfile(result.user, {
@@ -91,11 +99,13 @@ const Register = () => {
                                     </label>
                                 </div>
                                 <div className="relative h-11 w-full min-w-[200px]">
-                                    <div className="absolute top-2/4 right-3 grid h-5 w-5 -translate-y-2/4 place-items-center text-blue-gray-500">
-                                        <ImEye aria-hidden="true"></ImEye>
-                                    </div>
+                                    <span className="absolute top-2/4 right-3 grid h-5 w-5 -translate-y-2/4 place-items-center text-blue-gray-500 cursor-pointer" onClick={()=> setShowPassword(!showPassword)}>
+                                        {
+                                            showPassword ? <ImEye></ImEye> : <ImEyeBlocked></ImEyeBlocked>
+                                        }
+                                    </span>
                                     <input
-                                        type="password"
+                                        type={showPassword ? "text" : "password"}
                                         name="password"
                                         className="peer h-full w-full rounded-[7px] border border-blue-gray-200 bg-transparent px-3 py-2.5 font-sans text-sm font-normal text-blue-gray-700 outline outline-0 transition-all placeholder-shown:border placeholder-shown:border-blue-gray-200 placeholder-shown:border-t-blue-gray-200 focus:border-2 focus:border-purple-500 focus:border-t-transparent focus:outline-0 disabled:border-0 disabled:bg-blue-gray-50"
                                         placeholder=" "

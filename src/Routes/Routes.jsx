@@ -5,6 +5,10 @@ import Home from "../Pages/Home/Home";
 import Login from "./Login/Login";
 import ErrorPage from "../Pages/ErrorPage/ErrorPage";
 import Register from "./Register/Register";
+import PrivateRoute from "./PriveteRout/PrivateRoute";
+import AddProduct from "./AddProduct/AddProduct";
+import MyCart from "./MyCart/MyCart";
+import Brands from "../Pages/Brands/Brands";
   
   const router = createBrowserRouter([
     {
@@ -14,8 +18,12 @@ import Register from "./Register/Register";
       children: [
         {
             path: '/',
-            element: <Home></Home>,
-            loader: () => fetch('data.json')
+            element: <Home></Home>
+        },
+        {
+            path: '/brands',
+            element: <Brands></Brands>,
+            loader: () => fetch('http://localhost:5000/brands')
         },
         {
             path: '/login',
@@ -24,7 +32,16 @@ import Register from "./Register/Register";
         {
             path: '/register',
             element: <Register></Register>
-        }
+        },
+        {
+            path: '/addProducts',
+            element: <PrivateRoute><AddProduct></AddProduct></PrivateRoute>
+        },
+        {
+            path: '/myCarts',
+            element: <PrivateRoute><MyCart></MyCart></PrivateRoute>
+        },
+       
       ]
     },
   ]);
