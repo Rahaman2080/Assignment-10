@@ -19,7 +19,7 @@ const Home = () => {
             <div>
                 <ExtraSection></ExtraSection>
             </div>
-            <div>
+            <div className="my-10">
                 <ExtraSection2></ExtraSection2>
             </div>
         </div>

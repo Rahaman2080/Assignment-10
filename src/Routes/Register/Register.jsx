@@ -60,7 +60,7 @@ const Register = () => {
             <Navbar></Navbar>
             <div className="bg-[#F2F2F2]">
             <div className="p-6">
-                <div className="max-w-2xl mx-auto border bg-gradient-to-r from-blue-500 from-10% via-sky-500 via-30% to-emerald-400 to-90% py-8 rounded-3xl shadow-2xl">
+                <div className="max-w-2xl mx-auto border bg-base-100 py-8 rounded-3xl shadow-2xl">
                     <div className=" mx-6 md:mx-auto md:w-4/5">
                         <h1 className="text-pink-600 text-3xl font-semibold mb-8 text-center">Please Register</h1>
                         <form onSubmit={hanldeRegister}>

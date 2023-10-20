@@ -2,6 +2,7 @@ import { useContext } from "react";
 import { Link, NavLink } from "react-router-dom";
 import { AuthContext } from "../../Context/AuthProvider";
 import Swal from "sweetalert2";
+import { FiLogIn, FiLogOut } from 'react-icons/fi'
 
 
 const Navbar = () => {
@@ -52,10 +53,10 @@ const Navbar = () => {
                         </label>
                     }
                     {
-                        user ? <button onClick={handleSignOut} className="btn btn-ghost normal-case text-xl md:text-2xl font-bold">Log Out</button>
+                        user ? <button onClick={handleSignOut} className="btn btn-ghost normal-case text-xl md:text-2xl font-bold"><FiLogOut></FiLogOut></button>
                         :
                         <Link to="/login">
-                        <button className="btn btn-ghost normal-case text-xl md:text-2xl font-bold">Log in</button>
+                        <button className="btn btn-ghost normal-case text-xl md:text-2xl font-bold"><FiLogIn></FiLogIn></button>
                         </Link>
                     }
                 </div>

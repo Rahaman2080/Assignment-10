@@ -36,12 +36,15 @@ const ExtraSection = () => {
                         </div>
                     </div>
                 </div>
-                <div className="col-span-2 rounded-lg shadow-xl  bg-[#EBE9E6] h-80">
+                <div className="col-span-2 rounded-lg shadow-xl h-70 bg-[#EEEED6]" >
+                  <div>
+                    <img src="https://i.ibb.co/Ycccv23/banner6.jpg" alt="" />
+                  </div>
                     <div className=" text-center py-8" >
                             <div className="">
                                     <h1 className="mb-5 text-3xl md:text-5xl font-bold"><span className="text-[#C33442]">FIRST TIME</span> HERE?</h1>
                                     <p className="text-2xl md:text-4xl font-semibold">We are pleased to offer you</p>
-                                    <p className="text-3xl font-bold"><span className="text-[#C33442]">10%</span> DISCOUNT</p>
+                                    <p className="text-3xl font-bold"><span className="text-[#C33442]">75%</span> DISCOUNT</p>
                                     <button className="btn btn-primary btn-outline mt-5">Get Started</button>
                             </div>
                         </div>
