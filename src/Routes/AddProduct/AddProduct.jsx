@@ -59,12 +59,12 @@ const AddProduct = () => {
                                 <div className="input-group">
                                     <select type="select" name="brand" className="select select-bordered w-96">
                                         <option disabled selected>Brand Name</option>
-                                        <option value="L'Oréal Brand">L'Oréal Brand</option>
-                                        <option value="Revlon Brand">Revlon Brand</option>
-                                        <option value="Avon Brand">Avon Brand</option>
-                                        <option value="Estée Lauder Brand">Estée Lauder Brand</option>
-                                        <option value="Urban Decay Brand">Urban Decay Brand</option>
-                                        <option value="Dior Brand">Dior Brand</option>
+                                        <option value="Loreal">Loreal</option>
+                                        <option value="Revlon">Revlon</option>
+                                        <option value="Avon">Avon</option>
+                                        <option value="EsteeLauder">EsteeLauder</option>
+                                        <option value="UrbanDecay">UrbanDecay</option>
+                                        <option value="Dior">Dior</option>
                                     </select>
                                 </div>
                             </div>
