@@ -1,20 +1,20 @@
 import { Link } from "react-router-dom";
 
 
-const Product = ({product}) => {
-    const {brand,image, name, price, rating, type, _id} = product || {};
-
+const Detail = ({detail}) => {
+    const {brand,image, name, price, rating, type, details } = detail || {};
     return (
-        <div className="">
-            <div className="card w-66 bg-base-100 shadow-xl">
-                    <figure className="px-10 pt-10">
-                        <img src={image} alt="image" className="h-52" />
+        <div>
+            <div className="card bg-base-100 shadow-xl flex flex-col md:flex-row gap-5 m-6 md:m-0">
+                    <figure className="">
+                        <img src={image} alt="image" />
                     </figure>
-                    <div className="card-body items-center text-center">
-                        <p className="text-lg font-semibold">{name}</p>
-                        <p className="text-xl font-bold text-rose-500">{type}</p>
+                    <div className="card-body">
+                        <p className="text-lg font-bold">{name}</p>
+                        <p className="text-xl font-bold text-rose-500">Type: {type}</p>
+                        <p><span className="text-lg font-semibold">Details:</span> {details}</p>
                         <h2 className="card-title">Brand: {brand}</h2>
-                        <div className="flex justify-center items-center gap-4">
+                        <div className="flex gap-4">
                         <div className="rating">
                             <input type="radio" name="rating-1" className="mask mask-star bg-rose-500"  />
                             <input type="radio" name="rating-1" className="mask mask-star bg-rose-500" />
@@ -27,12 +27,9 @@ const Product = ({product}) => {
                         </div>
                         </div>
                         <p>price: ${price}</p>
-                        <div className="card-actions gap-8">
-                            <Link to={`/productDetails/${_id}`}>
-                            <button className="btn btn-primary normal-case btn-outline btn-sm">Details</button>
-                            </Link>
+                        <div className="card-actions">
                             <Link>
-                            <button className="btn btn-primary normal-case btn-outline btn-sm">Update</button>
+                            <button className="btn btn-primary normal-case btn-outline btn-sm">Add to Cart</button>
                             </Link>
                         </div>
                     </div>
@@ -41,4 +38,4 @@ const Product = ({product}) => {
     );
 };
 
-export default Product;
+export default Detail;

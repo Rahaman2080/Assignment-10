@@ -49,8 +49,9 @@ import ProductDetails from "../Pages/ProductDetails/ProductDetails";
             loader: ({params})=> fetch(`http://localhost:5000/products/${params.brand}`)
         },
         {
-            path: '/details',
-            element: <PrivateRoute><ProductDetails></ProductDetails></PrivateRoute>
+            path: '/productDetails/:id',
+            element: <PrivateRoute><ProductDetails></ProductDetails></PrivateRoute>,
+            loader: ({params}) => fetch(`http://localhost:5000/products/${params.id}`)
         }
        
       ]
