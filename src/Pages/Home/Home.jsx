@@ -4,6 +4,7 @@ import Brands from "../Brands/Brands";
 import ExtraSection from "../ExtraSection";
 import ExtraSection2 from "../ExtraSection2";
 import Navbar from "../Navbar/Navbar";
+import Navbar2 from "../Navbar/Navbar2";
 
 
 const Home = () => {
@@ -12,7 +13,12 @@ const Home = () => {
     return (
         <div>
             <Navbar></Navbar>
+            <div className="relative ">
             <Banner></Banner>
+            </div>
+            <div className="absolute top-20 right-0">
+            <Navbar2></Navbar2>
+            </div>
             <div className="bg-base-300">
                 <Brands></Brands>
             </div>
