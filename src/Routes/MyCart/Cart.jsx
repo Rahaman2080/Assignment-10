@@ -1,7 +1,41 @@
+import { AiOutlineDelete } from 'react-icons/ai'
+import Swal from 'sweetalert2';
 
+const Cart = ({cart, carts, setCarts}) => {
+    const {brand,image, name, price, rating, type, _id } = cart || {};
 
-const Cart = ({cart}) => {
-    const {brand,image, name, price, rating, type } = cart || {};
+    const handleDelete = id => {
+       
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "You won't be able to revert this!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, delete it!'
+        }).then((result)=>{
+            if(result.isConfirmed){
+                fetch(`http://localhost:5000/myCart/${id}`, {
+                    method: 'DELETE'
+                })
+                .then(res => res.json())
+                .then(data => {
+                    console.log(data);
+                    if(data.deletedCount > 0){
+                        Swal.fire(
+                            'Deleted!',
+                            'Your Cart has been deleted',
+                            'success'
+                        )
+                        const remaining = carts.filter(have => have._id !== _id);
+                        setCarts(remaining);
+                    } 
+                })
+            }
+        })
+    }
+
     return (
         <div>
             <div className="card w-66 bg-base-100 shadow-xl">
@@ -26,7 +60,7 @@ const Cart = ({cart}) => {
                         </div>
                         <p>price: ${price}</p>
                         <div className="card-actions gap-8">
-                            <button className="btn btn-primary normal-case btn-outline btn-sm">Delete</button>
+                            <button onClick={()=> handleDelete(_id)} className="btn btn-primary btn-outline"><AiOutlineDelete className='w-10 h-10'></AiOutlineDelete></button>
                         </div>
                     </div>
                 </div>
