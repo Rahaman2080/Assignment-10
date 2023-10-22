@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink, useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../Context/AuthProvider";
 import Swal from "sweetalert2";
 import { FiLogIn, FiLogOut } from 'react-icons/fi'
@@ -7,11 +7,16 @@ import { FiLogIn, FiLogOut } from 'react-icons/fi'
 
 const Navbar = () => {
     const { user, logOut } = useContext(AuthContext);
+    const location = useLocation();
+    const navigate = useNavigate();
 
     const handleSignOut = () =>{
         logOut()
         .then(()=>{
             Swal.fire('User logged out successful');
+
+            // navigate after loading
+            navigate(location?.state ? location.state : '/');
         })
         .catch()
     }

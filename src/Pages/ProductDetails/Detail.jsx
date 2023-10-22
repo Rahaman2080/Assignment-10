@@ -1,8 +1,35 @@
-import { Link } from "react-router-dom";
+import Swal from "sweetalert2";
+
 
 
 const Detail = ({detail}) => {
     const {brand,image, name, price, rating, type, details } = detail || {};
+
+    const handleAddCart = () =>{
+        const myCart = {brand,image, name, price, rating, type, details }
+        console.log(myCart);
+
+        // send data to the server
+        fetch('http://localhost:5000/addcart', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(myCart)
+        })
+            .then(res => res.json())
+            .then(data => {
+                console.log(data);
+                if (data.insertedId) {
+                    Swal.fire({
+                        text: 'Product added to myCart successful!',
+                        icon: 'success',
+                        confirmButtonText: 'Ok'
+                    })
+                }
+            })
+    }
+
     return (
         <div>
             <div className="card bg-base-100 shadow-xl flex flex-col md:flex-row gap-5 m-6 md:m-0">
@@ -28,9 +55,7 @@ const Detail = ({detail}) => {
                         </div>
                         <p>price: ${price}</p>
                         <div className="card-actions">
-                            <Link>
-                            <button className="btn btn-primary normal-case btn-outline btn-sm">Add to Cart</button>
-                            </Link>
+                            <button onClick={handleAddCart} className="btn btn-primary normal-case btn-outline btn-sm">Add to Cart</button>
                         </div>
                     </div>
                 </div>

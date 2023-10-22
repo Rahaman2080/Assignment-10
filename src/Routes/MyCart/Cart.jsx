@@ -1,11 +1,9 @@
-import { Link } from "react-router-dom";
 
 
-const Product = ({product}) => {
-    const {brand,image, name, price, rating, type, _id} = product || {};
-
+const Cart = ({cart}) => {
+    const {brand,image, name, price, rating, type } = cart || {};
     return (
-        <div className="">
+        <div>
             <div className="card w-66 bg-base-100 shadow-xl">
                     <figure className="px-10 pt-10">
                         <img src={image} alt="image" className="h-52" />
@@ -18,7 +16,7 @@ const Product = ({product}) => {
                         <div className="rating">
                             <input type="radio" name="rating-1" className="mask mask-star bg-rose-500"  />
                             <input type="radio" name="rating-1" className="mask mask-star bg-rose-500" />
-                            <input type="radio" name="rating-1" className="mask mask-star bg-rose-500" />
+                            <input type="radio" name="rating-1" className="mask mask-star bg-rose-500" checked />
                             <input type="radio" name="rating-1" className="mask mask-star bg-rose-500" />
                             <input type="radio" name="rating-1" className="mask mask-star bg-rose-500" />
                         </div>
@@ -28,12 +26,7 @@ const Product = ({product}) => {
                         </div>
                         <p>price: ${price}</p>
                         <div className="card-actions gap-8">
-                            <Link to={`/productDetails/${_id}`}>
-                            <button className="btn btn-primary normal-case btn-outline btn-sm">Details</button>
-                            </Link>
-                            <Link to={`/updateProducts/${_id}`}>
-                            <button className="btn btn-primary normal-case btn-outline btn-sm">Update</button>
-                            </Link>
+                            <button className="btn btn-primary normal-case btn-outline btn-sm">Delete</button>
                         </div>
                     </div>
                 </div>
@@ -41,4 +34,4 @@ const Product = ({product}) => {
     );
 };
 
-export default Product;
+export default Cart;
