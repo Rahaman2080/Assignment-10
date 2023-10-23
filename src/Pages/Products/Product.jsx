@@ -1,4 +1,6 @@
 import { Link } from "react-router-dom";
+import {  } from 'react-icons'
+import { AiOutlineEdit } from "react-icons/ai";
 
 
 const Product = ({product}) => {
@@ -32,7 +34,7 @@ const Product = ({product}) => {
                             <button className="btn btn-primary normal-case btn-outline btn-sm">Details</button>
                             </Link>
                             <Link to={`/updateProducts/${_id}`}>
-                            <button className="btn btn-primary normal-case btn-outline btn-sm">Update</button>
+                            <button className="btn btn-primary btn-sm btn-outline"><AiOutlineEdit className="w-14 h-8"></AiOutlineEdit></button>
                             </Link>
                         </div>
                     </div>
