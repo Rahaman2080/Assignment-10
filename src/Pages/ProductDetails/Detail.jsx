@@ -10,7 +10,7 @@ const Detail = ({detail}) => {
         console.log(myCart);
 
         // send data to the server
-        fetch('https://brand-shop-server-m0inxequ4-abdur-rahmans-projects-9a7b6bad.vercel.app/addcart', {
+        fetch('https://brand-shop-server-gold.vercel.app/addcart', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'

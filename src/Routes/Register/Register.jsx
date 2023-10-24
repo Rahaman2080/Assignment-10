@@ -6,7 +6,6 @@ import { AuthContext } from "../../Context/AuthProvider";
 import Swal from "sweetalert2";
 import { updateProfile } from "firebase/auth";
 
-
 const Register = () => {
     const { createUser } = useContext(AuthContext);
     const [showPassword, setShowPassword] = useState(false);
@@ -24,8 +23,8 @@ const Register = () => {
             Swal.fire('Password should be 6 characters');
             return;
         }
-        else if(!/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=!])(?!.*\s)$/.test(password)){
-            Swal.fire('Password should be a number, a Lower and Uppercase and a special character')
+        else if(!/^(?=.*[A-Z])(?=.*[@#$%^&+=!]).*$/.test(password)){
+            Swal.fire('Password should be a capital letter and a special character')
             return;
         } else if(!accepted){
             Swal.fire('Please accept our terms and conditions')

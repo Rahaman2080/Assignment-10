@@ -26,7 +26,7 @@ import UpdateProduct from "../Pages/Products/UpdateProduct/UpdateProduct";
         {
             path: '/brands',
             element: <Brands></Brands>,
-            loader: () => fetch('https://brand-shop-server-m0inxequ4-abdur-rahmans-projects-9a7b6bad.vercel.app/brands')
+            loader: () => fetch('https://brand-shop-server-gold.vercel.app/brands')
         },
         {
             path: '/login',
@@ -43,22 +43,22 @@ import UpdateProduct from "../Pages/Products/UpdateProduct/UpdateProduct";
         {
             path: '/myCarts',
             element: <PrivateRoute><MyCart></MyCart></PrivateRoute>,
-            loader: () => fetch('https://brand-shop-server-m0inxequ4-abdur-rahmans-projects-9a7b6bad.vercel.app/mycart')
+            loader: () => fetch('https://brand-shop-server-gold.vercel.app/mycart')
         },
         {
             path: '/products/:brand',
             element: <Products></Products>,
-            loader: ({params})=> fetch(`https://brand-shop-server-m0inxequ4-abdur-rahmans-projects-9a7b6bad.vercel.app/products/${params.brand}`)
+            loader: ({params})=> fetch(`https://brand-shop-server-gold.vercel.app/products/${params.brand}`)
         },
         {
             path: '/productDetails/:id',
             element: <PrivateRoute><ProductDetails></ProductDetails></PrivateRoute>,
-            loader: ({params}) => fetch(`https://brand-shop-server-m0inxequ4-abdur-rahmans-projects-9a7b6bad.vercel.app/productdetails/${params.id}`)
+            loader: ({params}) => fetch(`https://brand-shop-server-gold.vercel.app/productdetails/${params.id}`)
         },
         {
             path: '/updateProducts/:id',
             element: <PrivateRoute><UpdateProduct></UpdateProduct></PrivateRoute>,
-            loader: ({params})=> fetch(`https://brand-shop-server-m0inxequ4-abdur-rahmans-projects-9a7b6bad.vercel.app/productsById/${params.id}`)
+            loader: ({params})=> fetch(`https://brand-shop-server-gold.vercel.app/productsById/${params.id}`)
         }
        
       ]

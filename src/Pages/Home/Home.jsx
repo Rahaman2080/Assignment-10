@@ -16,9 +16,9 @@ const Home = () => {
             <div className="relative ">
             <Banner></Banner>
             </div>
-            <div className="absolute top-20 right-0">
+             <div className="absolute top-20 right-0">
             <Navbar2></Navbar2>
-            </div>
+            </div> 
             <div className="bg-base-300">
                 <Brands></Brands>
             </div>
